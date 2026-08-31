@@ -1,6 +1,6 @@
 import requests
 import uuid
-
+import time
 
 class ngl_bomber:
    print("------------------------------------------------------------------------------------")
@@ -14,24 +14,25 @@ class ngl_bomber:
                               B Y   S I O 87
          """)
    print("------------------------------------------------------------------------------------")
-
    def ngl():
-         USERNAME=input("ENTER THE USERNAME TO BOMB: ")
-         MESSAGE=input("ENTER A MESSAGE: ")
-         TIMES=int(input("ENTER A NUMBER OF TIMES YOU WANT TO SEND: "))
-         count=0
+      USERNAME=input("ENTER THE USERNAME TO BOMB: ")
+      MESSAGE=input("ENTER A MESSAGE: ").upper()
+      TIMES=int(input("ENTER A NUMBER OF TIMES YOU WANT TO SEND: "))
+         
+      count=0
 
-         while count < TIMES:
-               count += 1
-               url = "https://ngl.link/api/submit"
-               headers = {
+      while True:
+            count < TIMES
+            count += 1
+            url = "https://ngl.link/api/submit"
+            headers = {
                   "Content-Type": "application/x-www-form-urlencoded",
                   "X-Requested-With": "XMLHttpRequest",
                   "User-Agent": "Mozilla/5.0",
                   "Referer": f"https://ngl.link/{USERNAME}",
                }
 
-               data = {
+            data = {
                   "username": USERNAME,
                   "question": MESSAGE,
                   "deviceId": str(uuid.uuid4()),
@@ -39,22 +40,27 @@ class ngl_bomber:
                   "referrer": "",
                }
 
-               try:
-                  response = requests.post(
-                     url,
-                     headers=headers,
-                     data=data,
-                     timeout=15
-                  )
+            try:
+               response = requests.post(
+                  url,
+                  headers=headers,
+                  data=data,
+                  timeout=15
+               )
 
-                  print("Status:", response.status_code)
-                  print("Response:", response.text)
-                  print("------------------------------------------------------------------------------------")
-               except requests.RequestException as e:
-                  print("Request failed:", e)
+               print("MESSAGE SENT TO:",USERNAME)
+               print(count,"Status:", response.status_code)
+               print(count,"Response:", response.text)
+               time.sleep(2)
 
                if count == TIMES:
-                   print("BOMBED SUCCESSFULLY")
-                   print('--------------------------------BOMBED SUCCESSFULLY--------------------------------')
+                  total=0
+                  total.append(count)
+                  print("TOTAL MESSAGES SENT:",total)
+                  print('----------------------------------------------------------------')
+
+            except requests.RequestException as e:
+               print(f"BOMBED FAILED {count + 1}", e)
+               print('----------------------------------------------------------------')
 ngl_bomber.ngl()
    
