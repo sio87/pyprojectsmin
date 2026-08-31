@@ -20,7 +20,7 @@ class ngl_bomber:
       TIMES=int(input("ENTER A NUMBER OF TIMES YOU WANT TO SEND: "))
          
       count=0
-
+      total=0
       while True:
             count < TIMES
             count += 1
@@ -51,16 +51,15 @@ class ngl_bomber:
                print("MESSAGE SENT TO:",USERNAME)
                print(count,"Status:", response.status_code)
                print(count,"Response:", response.text)
-               time.sleep(2)
+               time.sleep(1)
 
                if count == TIMES:
-                  total=0
-                  total.append(count)
-                  print("TOTAL MESSAGES SENT:",total)
+                  totals=total+count
+                  print("TOTAL MESSAGES SENT:",[totals])
                   print('----------------------------------------------------------------')
+                  break
 
             except requests.RequestException as e:
                print(f"BOMBED FAILED {count + 1}", e)
                print('----------------------------------------------------------------')
 ngl_bomber.ngl()
-   
